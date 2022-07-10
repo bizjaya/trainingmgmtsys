@@ -1,0 +1,87 @@
+@hostname = http://localhost
+@port = 3000
+# @api = api
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+@token =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVbmFtZSI6IlRlc3RVc2VyMiIsIk1JZCI6IjYyYzZhMzk0NjNlYjc1OWExMGQ0ZDY3NiIsIlJvbGUiOiJBZG1pbiIsImlhdCI6MTY1NzQyODAwMSwiZXhwIjoxNjU3NDI5ODAxfQ.cp-WOV3s69wenjg4O8Q9vxIh2Ykb2T6iRgH88CG-Fac
+
+
+### Create USER
+
+POST {{host}}/user/create HTTP/1.1
+Content-Type: application/json
+
+{
+	"Fname" : "devon",
+	"Lname" : "kumar",
+	"Uname" : "TestUser3",
+	"Pswd" :"123456",
+    "Role":"User"
+}
+
+### AUTH USER 
+
+POST {{host}}/user/auth HTTP/1.1
+Content-Type: application/json
+
+{
+	"Uname" : "TestUser2",
+	"Pswd" :"654321"
+}
+
+
+### CREATE SUBJECT
+
+POST {{host}}/subject/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+    "Subjects":"test",
+    "Stream":"Commerce",
+    "Createdtdate":"",
+    "Updatedate":"",
+    "ModifiedBy":""
+}
+
+### CREATE COURSE
+
+POST {{host}}/course/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "CourseName": "Basics of Engg",
+    "Subject": ["Maths","Physics","English"],
+    "Type": "Basic",
+    "Createdtdate": "",
+    "Updatedate": "",
+    "ModifiedBy": ""
+}
+
+### GET ALL COURSE
+
+GET {{host}}/course/getall HTTP/1.1
+
+### GET ALL SUBJECT
+
+GET {{host}}/subject/getall?PageNo=1&PerPage=3&SrchBy={}&SortBy={'Subjects':'desc'}
+
+### GET TRAINING (filterbysubject)
+
+GET {{host}}/course/bysubject?subject=Economics HTTP/1.1
+
+### GET TRAINING (filterbystream)
+
+
+GET {{host}}/course/bystream?stream=Commerce HTTP/1.1
+
+### GET TRAINING (filterbytype)
+
+GET {{host}}/course/bytype?type=Detailed HTTP/1.1
+
+
+
+
